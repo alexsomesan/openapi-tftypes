@@ -62,93 +62,92 @@ var objectMetaType = tftypes.Object{
 }
 
 var samples = testSamples{
-	// {
-	// 	id:   "io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta",
-	// 	want: objectMetaType,
-	// },
-	// {
-	// 	id: "io.k8s.api.core.v1.ServicePort",
-	// 	want: tftypes.Object{
-	// 		AttributeTypes: map[string]tftypes.Type{
-	// 			"appProtocol": tftypes.String,
-	// 			"name":        tftypes.String,
-	// 			"nodePort":    tftypes.Number,
-	// 			"port":        tftypes.Number,
-	// 			"protocol":    tftypes.String,
-	// 			"targetPort":  tftypes.DynamicPseudoType,
-	// 		},
-	// 	},
-	// },
-	// {
-	// 	id: "io.k8s.api.core.v1.ConfigMap",
-	// 	want: tftypes.Object{
-	// 		AttributeTypes: map[string]tftypes.Type{
-	// 			"apiVersion": tftypes.String,
-	// 			"kind":       tftypes.String,
-	// 			"metadata":   objectMetaType,
-	// 			"immutable":  tftypes.Bool,
-	// 			"data":       tftypes.Map{AttributeType: tftypes.String},
-	// 			"binaryData": tftypes.Map{AttributeType: tftypes.String},
-	// 		},
-	// 	},
-	// },
-	// {
-	// 	id: "io.k8s.api.core.v1.Service",
-	// 	want: tftypes.Object{
-	// 		AttributeTypes: map[string]tftypes.Type{
-	// 			"apiVersion": tftypes.String,
-	// 			"kind":       tftypes.String,
-	// 			"metadata":   objectMetaType,
-	// 			"immutable":  tftypes.Bool,
-	// 			"spec": tftypes.Object{
-	// 				AttributeTypes: map[string]tftypes.Type{
-	// 					"clusterIP":                tftypes.String,
-	// 					"externalIPs":              tftypes.List{ElementType: tftypes.String},
-	// 					"externalName":             tftypes.String,
-	// 					"externalTrafficPolicy":    tftypes.String,
-	// 					"healthCheckNodePort":      tftypes.Number,
-	// 					"ipFamily":                 tftypes.String,
-	// 					"loadBalancerIP":           tftypes.String,
-	// 					"loadBalancerSourceRanges": tftypes.List{ElementType: tftypes.String},
-	// 					"ports": tftypes.List{
-	// 						ElementType: tftypes.Object{
-	// 							AttributeTypes: map[string]tftypes.Type{
-	// 								"appProtocol": tftypes.String,
-	// 								"name":        tftypes.String,
-	// 								"nodePort":    tftypes.Number,
-	// 								"port":        tftypes.Number,
-	// 								"protocol":    tftypes.String,
-	// 								"targetPort":  tftypes.DynamicPseudoType,
-	// 							},
-	// 						},
-	// 					},
-	// 					"publishNotReadyAddresses": tftypes.Bool,
-	// 					"selector":                 tftypes.Map{AttributeType: tftypes.String},
-	// 					"sessionAffinity":          tftypes.String,
-	// 					"sessionAffinityConfig": tftypes.Object{AttributeTypes: map[string]tftypes.Type{
-	// 						"clientIP": tftypes.Object{
-	// 							AttributeTypes: map[string]tftypes.Type{
-	// 								"timeoutSeconds": tftypes.Number,
-	// 							},
-	// 						},
-	// 					}},
-	// 					"topologyKeys": tftypes.List{ElementType: tftypes.String},
-	// 					"type":         tftypes.String,
-	// 				},
-	// 			},
-	// 			"status": tftypes.Object{AttributeTypes: map[string]tftypes.Type{
-	// 				"loadBalancer": tftypes.Object{AttributeTypes: map[string]tftypes.Type{
-	// 					"ingress": tftypes.List{ElementType: tftypes.Object{
-	// 						AttributeTypes: map[string]tftypes.Type{
-	// 							"hostname": tftypes.String,
-	// 							"ip":       tftypes.String,
-	// 						},
-	// 					}},
-	// 				}},
-	// 			}},
-	// 		},
-	// 	},
-	// },
+	{
+		id:   "io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta",
+		want: objectMetaType,
+	},
+	{
+		id: "io.k8s.api.core.v1.ServicePort",
+		want: tftypes.Object{
+			AttributeTypes: map[string]tftypes.Type{
+				"appProtocol": tftypes.String,
+				"name":        tftypes.String,
+				"nodePort":    tftypes.Number,
+				"port":        tftypes.Number,
+				"protocol":    tftypes.String,
+				"targetPort":  tftypes.DynamicPseudoType,
+			},
+		},
+	},
+	{
+		id: "io.k8s.api.core.v1.ConfigMap",
+		want: tftypes.Object{
+			AttributeTypes: map[string]tftypes.Type{
+				"apiVersion": tftypes.String,
+				"kind":       tftypes.String,
+				"metadata":   objectMetaType,
+				"immutable":  tftypes.Bool,
+				"data":       tftypes.Map{AttributeType: tftypes.String},
+				"binaryData": tftypes.Map{AttributeType: tftypes.String},
+			},
+		},
+	},
+	{
+		id: "io.k8s.api.core.v1.Service",
+		want: tftypes.Object{
+			AttributeTypes: map[string]tftypes.Type{
+				"apiVersion": tftypes.String,
+				"kind":       tftypes.String,
+				"metadata":   objectMetaType,
+				"spec": tftypes.Object{
+					AttributeTypes: map[string]tftypes.Type{
+						"clusterIP":                tftypes.String,
+						"externalIPs":              tftypes.List{ElementType: tftypes.String},
+						"externalName":             tftypes.String,
+						"externalTrafficPolicy":    tftypes.String,
+						"healthCheckNodePort":      tftypes.Number,
+						"ipFamily":                 tftypes.String,
+						"loadBalancerIP":           tftypes.String,
+						"loadBalancerSourceRanges": tftypes.List{ElementType: tftypes.String},
+						"ports": tftypes.List{
+							ElementType: tftypes.Object{
+								AttributeTypes: map[string]tftypes.Type{
+									"appProtocol": tftypes.String,
+									"name":        tftypes.String,
+									"nodePort":    tftypes.Number,
+									"port":        tftypes.Number,
+									"protocol":    tftypes.String,
+									"targetPort":  tftypes.DynamicPseudoType,
+								},
+							},
+						},
+						"publishNotReadyAddresses": tftypes.Bool,
+						"selector":                 tftypes.Map{AttributeType: tftypes.String},
+						"sessionAffinity":          tftypes.String,
+						"sessionAffinityConfig": tftypes.Object{AttributeTypes: map[string]tftypes.Type{
+							"clientIP": tftypes.Object{
+								AttributeTypes: map[string]tftypes.Type{
+									"timeoutSeconds": tftypes.Number,
+								},
+							},
+						}},
+						"topologyKeys": tftypes.List{ElementType: tftypes.String},
+						"type":         tftypes.String,
+					},
+				},
+				"status": tftypes.Object{AttributeTypes: map[string]tftypes.Type{
+					"loadBalancer": tftypes.Object{AttributeTypes: map[string]tftypes.Type{
+						"ingress": tftypes.List{ElementType: tftypes.Object{
+							AttributeTypes: map[string]tftypes.Type{
+								"hostname": tftypes.String,
+								"ip":       tftypes.String,
+							},
+						}},
+					}},
+				}},
+			},
+		},
+	},
 	{
 		id: "io.k8s.apiextensions-apiserver.pkg.apis.apiextensions.v1.CustomResourceDefinition",
 		want: tftypes.Object{
@@ -220,13 +219,13 @@ var samples = testSamples{
 						"shortNames": tftypes.List{ElementType: tftypes.String},
 						"singular":   tftypes.String,
 					}},
-					"conditions": tftypes.Object{AttributeTypes: map[string]tftypes.Type{
+					"conditions": tftypes.List{ElementType: tftypes.Object{AttributeTypes: map[string]tftypes.Type{
 						"lastTransitionTime": tftypes.String,
 						"message":            tftypes.String,
 						"reason":             tftypes.String,
 						"status":             tftypes.String,
 						"type":               tftypes.String,
-					}},
+					}}},
 					"storedVersions": tftypes.List{ElementType: tftypes.String},
 				}},
 			},
