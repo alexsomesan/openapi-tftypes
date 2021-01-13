@@ -58,16 +58,16 @@ func (f foapiv2) GetTypeByID(id string) (tftypes.Type, error) {
 	swd, ok := f.swagger.Definitions[id]
 
 	if !ok {
-		return tftypes.UnknownType, errors.New("invalid type identifier")
+		return nil, errors.New("invalid type identifier")
 	}
 
 	if swd == nil {
-		return tftypes.UnknownType, errors.New("invalid type reference (nil)")
+		return nil, errors.New("invalid type reference (nil)")
 	}
 
 	sch, err := f.resolveSchemaRef(swd)
 	if err != nil {
-		return tftypes.UnknownType, fmt.Errorf("failed to resolve schema: %s", err)
+		return nil, fmt.Errorf("failed to resolve schema: %s", err)
 	}
 
 	return f.getTypeFromSchema(sch, 0)
@@ -115,7 +115,7 @@ func (f foapiv2) getTypeFromSchema(elem *openapi3.Schema, stackdepth uint64) (tf
 	// log.Printf("stack depth: %d\n", stackdepth)
 
 	if elem == nil {
-		return tftypes.UnknownType, errors.New("cannot convert OpenAPI type (nil)")
+		return nil, errors.New("cannot convert OpenAPI type (nil)")
 	}
 
 	h, herr := hashstructure.Hash(elem, nil)
@@ -147,11 +147,11 @@ func (f foapiv2) getTypeFromSchema(elem *openapi3.Schema, stackdepth uint64) (tf
 	case "array":
 		it, err := f.resolveSchemaRef(elem.Items)
 		if err != nil {
-			return tftypes.UnknownType, fmt.Errorf("failed to resolve schema for items: %s", err)
+			return nil, fmt.Errorf("failed to resolve schema for items: %s", err)
 		}
 		et, err := f.getTypeFromSchema(it, stackdepth+1)
 		if err != nil {
-			return tftypes.UnknownType, err
+			return nil, err
 		}
 		t = tftypes.List{ElementType: et}
 		if herr == nil {
@@ -168,11 +168,11 @@ func (f foapiv2) getTypeFromSchema(elem *openapi3.Schema, stackdepth uint64) (tf
 			for p, v := range elem.Properties {
 				schema, err := f.resolveSchemaRef(v)
 				if err != nil {
-					return tftypes.UnknownType, fmt.Errorf("failed to resolve schema: %s", err)
+					return nil, fmt.Errorf("failed to resolve schema: %s", err)
 				}
 				pType, err := f.getTypeFromSchema(schema, stackdepth+1)
 				if err != nil {
-					return tftypes.UnknownType, err
+					return nil, err
 				}
 				atts[p] = pType
 			}
@@ -186,11 +186,11 @@ func (f foapiv2) getTypeFromSchema(elem *openapi3.Schema, stackdepth uint64) (tf
 			// this is how OpenAPI defines associative arrays
 			s, err := f.resolveSchemaRef(elem.AdditionalProperties)
 			if err != nil {
-				return tftypes.UnknownType, fmt.Errorf("failed to resolve schema: %s", err)
+				return nil, fmt.Errorf("failed to resolve schema: %s", err)
 			}
 			pt, err := f.getTypeFromSchema(s, stackdepth+1)
 			if err != nil {
-				return tftypes.UnknownType, err
+				return nil, err
 			}
 			t = tftypes.Map{AttributeType: pt}
 			if herr == nil {
@@ -209,5 +209,5 @@ func (f foapiv2) getTypeFromSchema(elem *openapi3.Schema, stackdepth uint64) (tf
 		}
 	}
 
-	return tftypes.UnknownType, fmt.Errorf("unknown type: %s", elem.Type)
+	return nil, fmt.Errorf("unknown type: %s", elem.Type)
 }
